@@ -4,12 +4,27 @@ import React, {useEffect, useState} from 'react';
 export default function LoginPage() {
     const navigate = useNavigate();
 
-    function CreateVote() {
+    function EnterVote() {
         console.log(document.getElementById("title").value);
     }
 
-    function EnterVote() {
+    function CreateVote() {
         console.log("Entering vote: " + document.getElementById("title").value);
+
+        fetch("api/create-new-vote", {
+      method:'POST',
+      body: JSON.stringify({
+        data : document.getElementById("title").value
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    });
+
     }
     return <div className="login-page">
         <h2>Enter your name</h2>
