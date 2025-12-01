@@ -7,8 +7,14 @@ app.use(express.json());
 app.post("/api/create-new-vote", async (req, res) => {
 
     try {
-        const voteName = req.body.data;
-        votes.push(voteName);
+        const voteID = req.body.data;    
+        for (let i = 0; i < votes.length; i++) {
+            if (voteID === votes[i]) {
+                console.log("Vote ID already exists.");
+                res.json("NOT UNIQUE");
+            }
+        }
+        votes.push(voteID);
         console.log("New vote added.");
         res.json("VALID");
     } catch (error) {
@@ -17,36 +23,20 @@ app.post("/api/create-new-vote", async (req, res) => {
     }
 });
 
-app.post("/api/get-vote-id", async (req, res) => {
+app.post("/api/validate-vote-id", async (req, res) => {
 
     try {
         const voteName = req.body.data;
         for (let i = 0; i < votes.length; i++) {
             if (voteName === votes[i]) {
                 console.log("Vote ID found.")
-                res.json(i);
+                res.json("VALID");
             }
         }
         console.log("No vote found.");
         res.json("Address Unknown.");
     } catch (error) {
         console.log("Error finding vote id: " + error);
-        res.json("INVALID");
-    }
-});
-
-app.post("/api/get-vote-name", async (req, res) => {
-
-    try {
-        const voteID = req.body.data;
-        if (voteID < votes.length) {
-            console.log("Vote Name found.")
-            res.json(votes[voteID]);
-        }
-        console.log("No vote found.");
-        res.json("Address Unknown.");
-    } catch (error) {
-        console.log("Error finding vote name: " + error);
         res.json("INVALID");
     }
 });
