@@ -22,7 +22,15 @@ export default function LoginPage() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
+        if (data === "VALID") {
+          console.log("SAVED");
+        }
+        else if (data === "NOT UNIQUE") {
+          console.log("Non unique ID, did not save.");
+        }
+        else {
+          console.log("An error occured.")
+        }
     });
 
     }
