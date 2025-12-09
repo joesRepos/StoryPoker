@@ -9,12 +9,14 @@ export default function LoginPage() {
     }
 
     function CreateVote() {
-        console.log("Entering vote: " + document.getElementById("title").value);
 
-        fetch("api/create-new-vote", {
+      let title = document.getElementById("title").value;
+      console.log("Entering vote: " + title);
+
+      fetch("api/create-new-vote", {
       method:'POST',
       body: JSON.stringify({
-        data : document.getElementById("title").value
+        data : title
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -23,7 +25,7 @@ export default function LoginPage() {
     .then(response => response.json())
     .then(data => {
         if (data === "VALID") {
-          console.log("SAVED");
+          navigate("/vote-page/" + title);
         }
         else if (data === "NOT UNIQUE") {
           console.log("Non unique ID, did not save.");
