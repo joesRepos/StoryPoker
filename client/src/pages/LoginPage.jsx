@@ -5,7 +5,29 @@ export default function LoginPage() {
     const navigate = useNavigate();
 
     function EnterVote() {
-        console.log(document.getElementById("title").value);
+        let title = document.getElementById("title").value;
+
+        fetch("api/validate-vote-id", {
+          method:'POST',
+          body: JSON.stringify({
+          data : title
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data === "VALID") {
+          navigate("/vote-page/" + title);
+          }
+          else if (data === "Address Unknown.") {
+          console.log("No address found with title: " + title);
+          }
+          else {
+            console.log("An error occured.")
+        }
+    });
     }
 
     function CreateVote() {
