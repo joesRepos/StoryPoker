@@ -29,7 +29,7 @@ app.post("/api/validate-vote-id", async (req, res) => {
         const voteName = req.body.data;
         for (let i = 0; i < votes.length; i++) {
             if (voteName === votes[i]) {
-                console.log("Vote ID found.")
+                console.log("Vote ID found.");
                 res.json("VALID");
             }
         }
@@ -37,6 +37,24 @@ app.post("/api/validate-vote-id", async (req, res) => {
         res.json("Address Unknown.");
     } catch (error) {
         console.log("Error finding vote id: " + error);
+        res.json("INVALID");
+    }
+});
+
+app.post("/api/remove-vote", async (req, res) => {
+
+    try {
+        const voteName = req.body.data;
+        for (let i = 0; i < votes.length; i++) {
+            if (voteName === votes[i]) {
+                votes.splice(i,i);
+                res.json("VALID");
+            }
+        }
+        console.log("Unable to remove vote id: " + voteName);
+        res.json("NOT DELETED");
+    } catch (error) {
+        console.log("Error removing vote id: " + error);
         res.json("INVALID");
     }
 });
