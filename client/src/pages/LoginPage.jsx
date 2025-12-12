@@ -47,6 +47,7 @@ export default function LoginPage() {
     .then(response => response.json())
     .then(data => {
         if (data === "VALID") {
+          sessionStorage.setItem("Admin", true);
           navigate("/vote-page/" + title);
         }
         else if (data === "NOT UNIQUE") {
