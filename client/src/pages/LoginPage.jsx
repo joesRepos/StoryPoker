@@ -6,6 +6,7 @@ export default function LoginPage() {
 
     function EnterVote() {
         let title = document.getElementById("title").value;
+        let name = document.getElementById("name").value;
 
         fetch("api/validate-vote-id", {
           method:'POST',
@@ -19,6 +20,7 @@ export default function LoginPage() {
       .then(response => response.json())
       .then(data => {
           if (data === "VALID") {
+            sessionStorage.setItem("Name", name);
           navigate("/vote-page/" + title);
           }
           else if (data === "Address Unknown.") {
@@ -33,6 +35,7 @@ export default function LoginPage() {
     function CreateVote() {
 
       let title = document.getElementById("title").value;
+      let name = document.getElementById("name").value;
       console.log("Entering vote: " + title);
 
       fetch("api/create-new-vote", {
@@ -48,6 +51,7 @@ export default function LoginPage() {
     .then(data => {
         if (data === "VALID") {
           sessionStorage.setItem("Admin", true);
+          sessionStorage.setItem("Name", name);
           navigate("/vote-page/" + title);
         }
         else if (data === "NOT UNIQUE") {

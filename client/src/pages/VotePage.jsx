@@ -4,15 +4,19 @@ import React, {useEffect, useState} from 'react';
 export default function LoginPage() {
     const navigate = useNavigate();
     const [voteID, setVoteID] = useState([]);
+    const [name, setName] = useState([]);
     const [admin, setAdmin] = useState([]);
 
     useEffect(() => {
         setVoteID(window.location.href.substring(window.location.href.lastIndexOf('/') + 1));
         console.log(voteID);
-        if (sessionStorage.getItem("Username")) {
+        setName(sessionStorage.getItem("Name"));
+        if (sessionStorage.getItem("Admin")) {
             setAdmin(true);
         }
     });
 
-    return <div className="vote-page">Vote Page</div>;
+    return <div className="vote-page">
+        <h1>Vote: {voteID}</h1>
+    </div>;
 }
