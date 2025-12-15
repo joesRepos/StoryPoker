@@ -16,7 +16,25 @@ export default function LoginPage() {
         }
     });
 
+    function CastVote(vote) {
+        console.log("Vote: " + vote)
+    }
+
+    function DisplayOptions() {
+        let rows = [];
+
+        for (let i = 0; i <= 5; i++) {
+            rows.push(
+            <button type="button" id={"button " + i} onClick={() => CastVote(i)}>{i}</button>
+            )
+            
+        }
+
+        return rows;
+    }
+
     return <div className="vote-page">
         <h1>Vote: {voteID}</h1>
+        <DisplayOptions/>
     </div>;
 }
