@@ -59,4 +59,15 @@ app.post("/api/remove-vote", async (req, res) => {
     }
 });
 
+app.post("/api/cast-vote", async (req, res) => {
+
+    try {
+        const { voteID, name, vote } = req.body;
+        console.log("Name: " + name + " voted " + vote + " in " + voteID);
+        res.json("VALID");
+    } catch (error) {
+        res.json("INVALID");
+    }
+});
+
 app.listen(5000,() => {console.log("Server started on port 5000")});

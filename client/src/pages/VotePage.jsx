@@ -17,7 +17,24 @@ export default function LoginPage() {
     });
 
     function CastVote(vote) {
-        console.log("Vote: " + vote)
+        console.log("Vote: " + vote);
+        fetch("api/cast-vote", {
+            method:'POST',
+            body: JSON.stringify({
+            voteID : voteID,
+            name: name,
+            vote: vote
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data === "INVALID") {
+                console.log("Error casting vote");
+            }
+        });
     }
 
     function DisplayOptions() {
