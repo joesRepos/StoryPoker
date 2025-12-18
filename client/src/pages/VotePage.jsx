@@ -46,12 +46,22 @@ export default function LoginPage() {
             )
             
         }
-
         return rows;
+    }
+
+    function DisplayRevealButton() {
+        if (admin) {
+            return <button type="button" id={"reveal"} onClick={RevealVotes()}>Reveal Votes</button>;
+        }
+    }
+
+    function RevealVotes() {
+        console.log("Revealed.")
     }
 
     return <div className="vote-page">
         <h1>Vote: {voteID}</h1>
         <DisplayOptions/>
+        <DisplayRevealButton/>
     </div>;
 }
