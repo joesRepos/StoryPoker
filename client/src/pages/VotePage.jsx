@@ -6,6 +6,7 @@ export default function LoginPage() {
     const [voteID, setVoteID] = useState([]);
     const [name, setName] = useState([]);
     const [admin, setAdmin] = useState([]);
+    const [revealed, setRevealed] = useState([]);
 
     useEffect(() => {
         setVoteID(window.location.href.substring(window.location.href.lastIndexOf('/') + 1));
@@ -51,6 +52,7 @@ export default function LoginPage() {
 
     function DisplayRevealButton() {
         if (admin) {
+            setRevealed(true);
             return <button type="button" id={"reveal"} onClick={RevealVotes()}>Reveal Votes</button>;
         }
     }
@@ -59,9 +61,27 @@ export default function LoginPage() {
         console.log("Revealed.")
     }
 
+    function DisplayRevealed() {
+        if (revealed) {
+            return <div>
+                <button type="button" id={"re-voteButton"} onClick={ReVote()}>Re-Vote</button>
+                <button type="button" id={"closeButton"} onClick={CloseVote()}>Close Vote</button>
+                </div>;
+        }
+    }
+
+    function ReVote() {
+        console.log("Re-voting.")
+    }
+
+    function CloseVote() {
+        console.log("Closing Vote.");
+    }
+
     return <div className="vote-page">
         <h1>Vote: {voteID}</h1>
         <DisplayOptions/>
         <DisplayRevealButton/>
+        <DisplayRevealed/>
     </div>;
 }
