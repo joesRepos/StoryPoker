@@ -72,6 +72,25 @@ export default function LoginPage() {
 
     function ReVote() {
         console.log("Re-voting.")
+        fetch("api/remove-vote", {
+            method:'POST',
+            body: JSON.stringify({
+                data : voteID
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data === "VALID") {
+                sessionStorage.setItem("Admin", false);
+                navigate("/");
+            }
+            else {
+                console.log("An error occured closing the vote.")
+            }
+        });
     }
 
     function CloseVote() {

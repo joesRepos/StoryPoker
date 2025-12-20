@@ -46,21 +46,21 @@ export default function LoginPage() {
       headers: {
         'Content-Type': 'application/json'
       }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data === "VALID") {
-          sessionStorage.setItem("Admin", true);
-          sessionStorage.setItem("Name", name);
-          navigate("/vote-page/" + title);
-        }
-        else if (data === "NOT UNIQUE") {
-          console.log("Non unique ID, did not save.");
-        }
-        else {
-          console.log("An error occured.")
-        }
-    });
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data === "VALID") {
+            sessionStorage.setItem("Admin", true);
+            sessionStorage.setItem("Name", name);
+            navigate("/vote-page/" + title);
+          }
+          else if (data === "NOT UNIQUE") {
+            console.log("Non unique ID, did not save.");
+          }
+          else {
+            console.log("An error occured.")
+          }
+        });
 
     }
     return <div className="login-page">
