@@ -70,4 +70,15 @@ app.post("/api/cast-vote", async (req, res) => {
     }
 });
 
+app.post("/api/reopen-vote", async (req, res) => {
+
+    try {
+        const voteName = req.body.data;
+        console.log("Reopen vote" + voteName);
+        res.json("VALID");
+    } catch (error) {
+        res.json("INVALID");
+    }
+});
+
 app.listen(5000,() => {console.log("Server started on port 5000")});

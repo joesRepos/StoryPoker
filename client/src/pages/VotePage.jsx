@@ -70,8 +70,7 @@ export default function LoginPage() {
         }
     }
 
-    function ReVote() {
-        console.log("Re-voting.")
+    function CloseVote() {
         fetch("api/remove-vote", {
             method:'POST',
             body: JSON.stringify({
@@ -85,6 +84,7 @@ export default function LoginPage() {
         .then(data => {
             if (data === "VALID") {
                 sessionStorage.setItem("Admin", false);
+                setRevealed(false);
                 navigate("/");
             }
             else {
@@ -93,8 +93,27 @@ export default function LoginPage() {
         });
     }
 
-    function CloseVote() {
-        console.log("Closing Vote.");
+    function ReVote() {
+
+
+        fetch("api/reopen-vote", {
+            method:'POST',
+            body: JSON.stringify({
+                data : voteID
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data === "VALID") {
+                setRevealed(false);
+            }
+            else {
+                console.log("An error occured closing the vote.")
+            }
+        });
     }
 
     return <div className="vote-page">
