@@ -7,7 +7,10 @@ app.use(express.json());
 app.post("/api/create-new-vote", async (req, res) => {
 
     try {
-        const voteID = req.body.data;    
+        const voteID = req.body.data;
+        if (voteID === "CLOSED") {
+            res.json("Invalid, keyword used.");
+        }
         for (let i = 0; i < votes.length; i++) {
             if (voteID === votes[i].subject) {
                 console.log("Vote ID already exists.");
@@ -34,6 +37,7 @@ app.post("/api/validate-vote-id", async (req, res) => {
             if (voteName === votes[i].subject) {
                 console.log("Vote ID found.");
                 res.json("VALID");
+                return;
             }
         }
         console.log("No vote found.");
@@ -50,8 +54,9 @@ app.post("/api/remove-vote", async (req, res) => {
         const voteName = req.body.data;
         for (let i = 0; i < votes.length; i++) {
             if (voteName === votes[i].subject) {
-                votes.splice(i,i);
+                votes[i].subject = "CLOSED";
                 res.json("VALID");
+                return;
             }
         }
         console.log("Unable to remove vote id: " + voteName);

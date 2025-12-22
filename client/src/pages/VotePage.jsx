@@ -74,7 +74,7 @@ export default function LoginPage() {
     }
 
     function CloseVote() {
-        fetch("api/remove-vote", {
+        fetch("/api/remove-vote", {
             method:'POST',
             body: JSON.stringify({
                 data : voteID
@@ -99,7 +99,7 @@ export default function LoginPage() {
     function ReVote() {
 
 
-        fetch("api/reopen-vote", {
+        fetch("/api/reopen-vote", {
             method:'POST',
             body: JSON.stringify({
                 data : voteID
