@@ -9,12 +9,15 @@ app.post("/api/create-new-vote", async (req, res) => {
     try {
         const voteID = req.body.data;    
         for (let i = 0; i < votes.length; i++) {
-            if (voteID === votes[i]) {
+            if (voteID === votes[i].subject) {
                 console.log("Vote ID already exists.");
                 res.json("NOT UNIQUE");
             }
         }
-        votes.push(voteID);
+        votes.push({
+            subject: voteID,
+            votes: {}
+        });
         console.log("New vote added.");
         res.json("VALID");
     } catch (error) {
@@ -28,7 +31,7 @@ app.post("/api/validate-vote-id", async (req, res) => {
     try {
         const voteName = req.body.data;
         for (let i = 0; i < votes.length; i++) {
-            if (voteName === votes[i]) {
+            if (voteName === votes[i].subject) {
                 console.log("Vote ID found.");
                 res.json("VALID");
             }
@@ -46,7 +49,7 @@ app.post("/api/remove-vote", async (req, res) => {
     try {
         const voteName = req.body.data;
         for (let i = 0; i < votes.length; i++) {
-            if (voteName === votes[i]) {
+            if (voteName === votes[i].subject) {
                 votes.splice(i,i);
                 res.json("VALID");
             }

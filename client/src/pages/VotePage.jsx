@@ -12,8 +12,11 @@ export default function LoginPage() {
         setVoteID(window.location.href.substring(window.location.href.lastIndexOf('/') + 1));
         console.log(voteID);
         setName(sessionStorage.getItem("Name"));
-        if (sessionStorage.getItem("Admin")) {
+        if (sessionStorage.getItem("Admin") === "true") {
             setAdmin(true);
+        }
+        else {
+            setAdmin(false);
         }
     });
 
@@ -52,20 +55,20 @@ export default function LoginPage() {
 
     function DisplayRevealButton() {
         if (admin) {
-            setRevealed(true);
-            return <button type="button" id={"reveal"} onClick={RevealVotes()}>Reveal Votes</button>;
+            return <button type="button" id={"reveal"} onClick={RevealVotes}>Reveal Votes</button>;
         }
     }
 
     function RevealVotes() {
+        setRevealed(true);
         console.log("Revealed.")
     }
 
     function DisplayRevealed() {
-        if (revealed) {
+        if (revealed === true) {
             return <div>
-                <button type="button" id={"re-voteButton"} onClick={ReVote()}>Re-Vote</button>
-                <button type="button" id={"closeButton"} onClick={CloseVote()}>Close Vote</button>
+                <button type="button" id={"re-voteButton"} onClick={ReVote}>Re-Vote</button>
+                <button type="button" id={"closeButton"} onClick={CloseVote}>Close Vote</button>
                 </div>;
         }
     }
