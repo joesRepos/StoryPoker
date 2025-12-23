@@ -72,7 +72,15 @@ app.post("/api/cast-vote", async (req, res) => {
     try {
         const { voteID, name, vote } = req.body;
         console.log("Name: " + name + " voted " + vote + " in " + voteID);
-        res.json("VALID");
+        for (let i = 0; i < votes.length; i++) {
+            if (votes[i].subject = voteID) {
+                votes[i].votes[name] = vote;
+                res.json("VALID");
+                console.log(votes);
+                return;
+            }
+        }
+        res.json("NO VOTE FOUND");
     } catch (error) {
         res.json("INVALID");
     }

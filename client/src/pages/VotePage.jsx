@@ -21,8 +21,7 @@ export default function LoginPage() {
     });
 
     function CastVote(vote) {
-        console.log("Vote: " + vote);
-        fetch("api/cast-vote", {
+        fetch("/api/cast-vote", {
             method:'POST',
             body: JSON.stringify({
             voteID : voteID,
@@ -37,6 +36,9 @@ export default function LoginPage() {
         .then(data => {
             if (data === "INVALID") {
                 console.log("Error casting vote");
+            }
+            else if (data === "NO VOTE FOUND") {
+                console.log("The vote does not exist in the server.");
             }
         });
     }
