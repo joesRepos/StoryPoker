@@ -76,7 +76,6 @@ app.post("/api/cast-vote", async (req, res) => {
             if (votes[i].subject = voteID) {
                 votes[i].votes[name] = vote;
                 res.json("VALID");
-                console.log(votes);
                 return;
             }
         }
@@ -92,6 +91,14 @@ app.post("/api/reopen-vote", async (req, res) => {
         const voteName = req.body.data;
         console.log("Reopen vote" + voteName);
         res.json("VALID");
+        for (let i = 0; i < votes.length; i++) {
+            if (votes[i].subject = voteID) {
+                votes[i].votes = {};
+                res.json("VALID");
+                return;
+            }
+        }
+        
     } catch (error) {
         res.json("INVALID");
     }
