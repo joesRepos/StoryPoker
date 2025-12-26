@@ -90,7 +90,6 @@ app.post("/api/reopen-vote", async (req, res) => {
     try {
         const voteName = req.body.data;
         console.log("Reopen vote" + voteName);
-        res.json("VALID");
         for (let i = 0; i < votes.length; i++) {
             if (votes[i].subject = voteID) {
                 votes[i].votes = {};
@@ -103,5 +102,23 @@ app.post("/api/reopen-vote", async (req, res) => {
         res.json("INVALID");
     }
 });
+
+app.post("/api/get-votes", async (req, res) => {
+
+    try {
+        const voteName = req.body.data;
+        console.log("Fetching votes for " + voteName);
+        for (let i = 0; i < votes.length; i++) {
+            if (votes[i].subject = voteID) {
+                res.json(votes[i].votes);
+                return;
+            }
+        }
+        
+    } catch (error) {
+        res.json("INVALID");
+    }
+});
+
 
 app.listen(5000,() => {console.log("Server started on port 5000")});

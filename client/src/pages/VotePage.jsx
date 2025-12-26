@@ -71,8 +71,30 @@ export default function LoginPage() {
             return <div>
                 <button type="button" id={"re-voteButton"} onClick={ReVote}>Re-Vote</button>
                 <button type="button" id={"closeButton"} onClick={CloseVote}>Close Vote</button>
+                <DisplayVotes/>
                 </div>;
         }
+    }
+
+    function DisplayVotes() {
+        fetch("/api/get-votes", {
+            method:'POST',
+            body: JSON.stringify({
+                data : voteID
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data === "INVALID") {
+                console.log("Error fetching votes.");
+                return;
+            }
+            let rows = [];
+            return rows;
+        });
     }
 
     function CloseVote() {
