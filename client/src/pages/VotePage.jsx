@@ -93,6 +93,13 @@ export default function LoginPage() {
                 return;
             }
             let rows = [];
+            for (let entry of data) {
+                rows.push(
+                    <div>
+                        {entry}
+                    </div>
+                );
+            }
             return rows;
         });
     }
