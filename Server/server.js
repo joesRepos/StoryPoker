@@ -73,7 +73,7 @@ app.post("/api/cast-vote", async (req, res) => {
         const { voteID, name, vote } = req.body;
         console.log("Name: " + name + " voted " + vote + " in " + voteID);
         for (let i = 0; i < votes.length; i++) {
-            if (votes[i].subject = voteID) {
+            if (votes[i].subject === voteID) {
                 votes[i].votes[name] = vote;
                 res.json("VALID");
                 return;
@@ -88,10 +88,10 @@ app.post("/api/cast-vote", async (req, res) => {
 app.post("/api/reopen-vote", async (req, res) => {
 
     try {
-        const voteName = req.body.data;
-        console.log("Reopen vote" + voteName);
+        const voteID = req.body.data;
+        console.log("Reopen vote" + voteID);
         for (let i = 0; i < votes.length; i++) {
-            if (votes[i].subject = voteID) {
+            if (votes[i].subject === voteID) {
                 votes[i].votes = {};
                 res.json("VALID");
                 return;
@@ -109,7 +109,7 @@ app.post("/api/get-votes", async (req, res) => {
         const voteName = req.body.data;
         console.log("Fetching votes for " + voteName);
         for (let i = 0; i < votes.length; i++) {
-            if (votes[i].subject = voteID) {
+            if (votes[i].subject === voteName) {
                 res.json(votes[i].votes);
                 return;
             }
