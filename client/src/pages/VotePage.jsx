@@ -75,33 +75,31 @@ export default function LoginPage() {
                 </div>;
         }
     }
-
     function DisplayVotes() {
-        fetch("/api/get-votes", {
-            method:'POST',
-            body: JSON.stringify({
-                data : voteID
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data === "INVALID") {
-                console.log("Error fetching votes.");
-                return;
-            }
-            let rows = [];
-            for (let entry of data) {
-                rows.push(
-                    <div>
-                        {entry}
+        const [rows, setRows] = React.useState([]);
+        React.useEffect(() => {
+            fetch("/api/get-votes", {
+                method: "POST",
+                body: JSON.stringify({ data: voteID }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data === "INVALID") {
+                    console.log("Error fetching votes.");
+                    return;
+                }
+                const newRows = Object.entries(data).map(([key, value]) => (
+                <div key={key}>
+                    {key}: {value}
                     </div>
-                );
-            }
-            return rows;
-        });
+                    ));
+                    setRows(newRows);
+                });
+            }, []);
+        return <div>{rows}</div>;
     }
 
     function CloseVote() {
