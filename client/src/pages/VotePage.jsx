@@ -70,6 +70,7 @@ export default function LoginPage() {
         if (revealed === true) {
             return <div>
                 <button type="button" id={"re-voteButton"} onClick={ReVote}>Re-Vote</button>
+                <div/>
                 <button type="button" id={"closeButton"} onClick={CloseVote}>Close Vote</button>
                 <DisplayVotes/>
                 </div>;
@@ -93,7 +94,7 @@ export default function LoginPage() {
                 }
                 const newRows = Object.entries(data).map(([key, value]) => (
                 <div key={key}>
-                    {key}: {value}
+                    {key} voted {value}
                     </div>
                     ));
                     setRows(newRows);
