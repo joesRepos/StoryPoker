@@ -46,6 +46,16 @@ export default function LoginPage() {
       let name = document.getElementById("name").value;
       console.log("Entering vote: " + title);
 
+
+      if (name === "") {
+          alert("Please enter your name.");
+          return;
+        }
+        else if (title === "") {
+          alert("Please enter a unique title for your vote.");
+          return;
+        }
+
       fetch("api/create-new-vote", {
       method:'POST',
       body: JSON.stringify({
