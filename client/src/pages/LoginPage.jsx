@@ -8,6 +8,14 @@ export default function LoginPage() {
         let title = document.getElementById("title").value;
         let name = document.getElementById("name").value;
 
+        if (name === "") {
+          alert("Please enter your name.");
+          return;
+        }
+        else if (title === "") {
+          alert("Please enter a vote title.");
+          return;
+        }
         fetch("api/validate-vote-id", {
           method:'POST',
           body: JSON.stringify({
