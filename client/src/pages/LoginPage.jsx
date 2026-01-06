@@ -75,8 +75,8 @@ export default function LoginPage() {
           else if (data === "NOT UNIQUE") {
             console.log("Non unique ID, did not save.");
           }
-          else if (data === "Invalid, keyword used.") {
-            console.log("Invalid, keyword used.");
+          else if (data === "Invalid, keyword used or null.") {
+            console.log("Invalid, keyword used or left blank.");
           }
           else {
             console.log("An error occured.")

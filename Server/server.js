@@ -8,8 +8,8 @@ app.post("/api/create-new-vote", async (req, res) => {
 
     try {
         const voteID = req.body.data;
-        if (voteID === "CLOSED") {
-            res.json("Invalid, keyword used.");
+        if (voteID === "CLOSED"|| voteID === "") {
+            res.json("Invalid, keyword used or null.");
         }
         for (let i = 0; i < votes.length; i++) {
             if (voteID === votes[i].subject) {
