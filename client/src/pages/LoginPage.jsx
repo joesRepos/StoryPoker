@@ -34,6 +34,9 @@ export default function LoginPage() {
           else if (data === "Address Unknown.") {
           console.log("No address found with title: " + title);
           }
+          else if ("No vote name entered.") {
+            console.log("No vote name entered.");
+          }
           else {
             console.log("An error occured.")
         }

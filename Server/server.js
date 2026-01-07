@@ -8,8 +8,9 @@ app.post("/api/create-new-vote", async (req, res) => {
 
     try {
         const voteID = req.body.data;
-        if (voteID === "CLOSED"|| voteID === "") {
+        if (voteID === "CLOSED" || voteID === "") {
             res.json("Invalid, keyword used or null.");
+            return;
         }
         for (let i = 0; i < votes.length; i++) {
             if (voteID === votes[i].subject) {
@@ -33,6 +34,10 @@ app.post("/api/validate-vote-id", async (req, res) => {
 
     try {
         const voteName = req.body.data;
+        if (voteName === "") {
+            res.json("No vote name entered.");
+            return;
+        }
         for (let i = 0; i < votes.length; i++) {
             if (voteName === votes[i].subject) {
                 console.log("Vote ID found.");
