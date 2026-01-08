@@ -35,7 +35,7 @@ export default function LoginPage() {
           console.log("No address found with title: " + title);
           }
           else if ("No vote name entered.") {
-            console.log("No vote name entered.");
+            alert("Please enter a vote name.");
           }
           else {
             console.log("An error occured.")
@@ -76,10 +76,10 @@ export default function LoginPage() {
             navigate("/vote-page/" + title);
           }
           else if (data === "NOT UNIQUE") {
-            console.log("Non unique ID, did not save.");
+            alert("ID must be unique.");
           }
           else if (data === "Invalid, keyword used or null.") {
-            console.log("Invalid, keyword used or left blank.");
+            alert("Your name and the ID of the vote must be entered.");
           }
           else {
             console.log("An error occured.")
