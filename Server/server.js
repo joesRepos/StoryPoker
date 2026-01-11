@@ -1,9 +1,11 @@
 const express = require('express');
 const app = express();
 
+// The array of votes.
 let votes = [];
 app.use(express.json());
 
+// Creates the new vote and returns error messages if unsucessful.
 app.post("/api/create-new-vote", async (req, res) => {
 
     try {
@@ -30,6 +32,7 @@ app.post("/api/create-new-vote", async (req, res) => {
     }
 });
 
+// With an incoming vote ID, checks that it does exist. 
 app.post("/api/validate-vote-id", async (req, res) => {
 
     try {
@@ -53,6 +56,7 @@ app.post("/api/validate-vote-id", async (req, res) => {
     }
 });
 
+// Intakes a vote ID and 'removes' it by marking it as 'CLOSED'.
 app.post("/api/remove-vote", async (req, res) => {
 
     try {
@@ -72,6 +76,7 @@ app.post("/api/remove-vote", async (req, res) => {
     }
 });
 
+// A Voter sends in a vote for a specific vote ID.
 app.post("/api/cast-vote", async (req, res) => {
 
     try {
@@ -90,6 +95,7 @@ app.post("/api/cast-vote", async (req, res) => {
     }
 });
 
+// Re-opens a vote of a specific vote ID.
 app.post("/api/reopen-vote", async (req, res) => {
 
     try {
@@ -108,6 +114,7 @@ app.post("/api/reopen-vote", async (req, res) => {
     }
 });
 
+// Gets all the votes for an inputted Vote ID. 
 app.post("/api/get-votes", async (req, res) => {
 
     try {
