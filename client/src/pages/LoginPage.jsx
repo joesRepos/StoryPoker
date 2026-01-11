@@ -5,6 +5,7 @@ import './App.css';
 export default function LoginPage() {
     const navigate = useNavigate();
 
+    // The user enters the vote as a vote, entering their name and the vote ID.
     function EnterVote() {
         let title = document.getElementById("title").value;
         let name = document.getElementById("name").value;
@@ -44,6 +45,7 @@ export default function LoginPage() {
     });
     }
 
+    // Creates the new vote with a name for the admin and the Vote ID.
     function CreateVote() {
 
       let title = document.getElementById("title").value;
@@ -88,6 +90,8 @@ export default function LoginPage() {
         });
 
     }
+
+    // Returns the HTML.
     return <div className="login-page">
         <h2>Enter your name</h2>
         <input type="text" id = "name" placeholder="Name" required/>

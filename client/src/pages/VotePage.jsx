@@ -9,6 +9,7 @@ export default function LoginPage() {
     const [admin, setAdmin] = useState([]);
     const [revealed, setRevealed] = useState([]);
 
+    // Upon loading the page, data is fetched from the local storage and stored. 
     useEffect(() => {
         setVoteID(window.location.href.substring(window.location.href.lastIndexOf('/') + 1));
         console.log(voteID);
@@ -21,6 +22,7 @@ export default function LoginPage() {
         }
     });
 
+    // Sends a vote to the server for the current vote.
     function CastVote(vote) {
         fetch("/api/cast-vote", {
             method:'POST',
@@ -44,6 +46,7 @@ export default function LoginPage() {
         });
     }
 
+    // Displays the vote options in the HTML.
     function DisplayOptions() {
         let rows = [];
 
@@ -56,19 +59,22 @@ export default function LoginPage() {
         return rows;
     }
 
+    // Checks if the user is the admin and if so displays the reveal button.
     function DisplayRevealButton() {
         if (admin) {
             return <button type="button" id={"reveal"} onClick={RevealVotes}>Reveal Votes</button>;
         }
     }
 
+    // Sets reveal to true, used when the reveal button is pressed.
     function RevealVotes() {
         setRevealed(true);
         console.log("Revealed.")
     }
 
+    // After the vote has been 'revealed', the options are displayed.
     function DisplayRevealed() {
-        if (revealed === true) {
+        if (revealed === true && admin === true) {
             return <div>
                 <button type="button" id={"re-voteButton"} onClick={ReVote}>Re-Vote</button>
                 <div/>
@@ -77,6 +83,8 @@ export default function LoginPage() {
                 </div>;
         }
     }
+
+    // Displays the vote dynamically.
     function DisplayVotes() {
         const [rows, setRows] = React.useState([]);
         React.useEffect(() => {
@@ -104,6 +112,7 @@ export default function LoginPage() {
         return <div>{rows}</div>;
     }
 
+    // Sends a request to the server to close the vote.
     function CloseVote() {
         fetch("/api/remove-vote", {
             method:'POST',
@@ -127,9 +136,8 @@ export default function LoginPage() {
         });
     }
 
+    // Sends a request to the server to reo-open the vote once it is finished.
     function ReVote() {
-
-
         fetch("/api/reopen-vote", {
             method:'POST',
             body: JSON.stringify({
@@ -150,6 +158,7 @@ export default function LoginPage() {
         });
     }
 
+    // Returns the HTML.
     return <div className="vote-page">
         <h1>Vote: {voteID}</h1>
         <DisplayOptions/>
