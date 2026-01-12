@@ -34,13 +34,13 @@ export default function LoginPage() {
           navigate("/vote-page/" + title);
           }
           else if (data === "Address Unknown.") {
-          console.log("No address found with title: " + title);
+          alert("No address found with title: " + title);
           }
           else if ("No vote name entered.") {
             alert("Please enter a vote name.");
           }
           else {
-            console.log("An error occured.")
+            alert("An error entering vote.")
         }
     });
     }
@@ -50,8 +50,6 @@ export default function LoginPage() {
 
       let title = document.getElementById("title").value;
       let name = document.getElementById("name").value;
-      console.log("Entering vote: " + title);
-
 
       if (name === "") {
           alert("Please enter your name.");
@@ -85,7 +83,7 @@ export default function LoginPage() {
             alert("Your name and the ID of the vote must be entered.");
           }
           else {
-            console.log("An error occured.")
+            alert("An error occured creating vote.")
           }
         });
 

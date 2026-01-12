@@ -12,7 +12,6 @@ export default function LoginPage() {
     // Upon loading the page, data is fetched from the local storage and stored. 
     useEffect(() => {
         setVoteID(window.location.href.substring(window.location.href.lastIndexOf('/') + 1));
-        console.log(voteID);
         setName(sessionStorage.getItem("Name"));
         if (sessionStorage.getItem("Admin") === "true") {
             setAdmin(true);
@@ -38,10 +37,10 @@ export default function LoginPage() {
         .then(response => response.json())
         .then(data => {
             if (data === "INVALID") {
-                console.log("Error casting vote");
+                alert("Error casting vote.");
             }
             else if (data === "NO VOTE FOUND") {
-                console.log("The vote does not exist in the server.");
+                alert("The vote does not exist in the server.");
             }
         });
     }
@@ -69,7 +68,6 @@ export default function LoginPage() {
     // Sets reveal to true, used when the reveal button is pressed.
     function RevealVotes() {
         setRevealed(true);
-        console.log("Revealed.")
     }
 
     // After the vote has been 'revealed', the options are displayed.
@@ -98,7 +96,7 @@ export default function LoginPage() {
             .then(res => res.json())
             .then(data => {
                 if (data === "INVALID") {
-                    console.log("Error fetching votes.");
+                    alert("Error fetching votes.");
                     return;
                 }
                 const newRows = Object.entries(data).map(([key, value]) => (
@@ -131,7 +129,7 @@ export default function LoginPage() {
                 navigate("/");
             }
             else {
-                console.log("An error occured closing the vote.")
+                alert("An error occured closing the vote.")
             }
         });
     }
@@ -153,7 +151,7 @@ export default function LoginPage() {
                 setRevealed(false);
             }
             else {
-                console.log("An error occured closing the vote.")
+                alert("An error occured closing the vote.")
             }
         });
     }
