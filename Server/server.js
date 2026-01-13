@@ -16,7 +16,6 @@ app.post("/api/create-new-vote", async (req, res) => {
         }
         for (let i = 0; i < votes.length; i++) {
             if (voteID === votes[i].subject) {
-                console.log("Vote ID already exists.");
                 res.json("NOT UNIQUE");
             }
         }
@@ -24,10 +23,8 @@ app.post("/api/create-new-vote", async (req, res) => {
             subject: voteID,
             votes: {}
         });
-        console.log("New vote added.");
         res.json("VALID");
     } catch (error) {
-        console.log("Error creating new vote: " + error);
         res.json("INVALID");
     }
 });
@@ -43,15 +40,12 @@ app.post("/api/validate-vote-id", async (req, res) => {
         }
         for (let i = 0; i < votes.length; i++) {
             if (voteName === votes[i].subject) {
-                console.log("Vote ID found.");
                 res.json("VALID");
                 return;
             }
         }
-        console.log("No vote found.");
         res.json("Address Unknown.");
     } catch (error) {
-        console.log("Error finding vote id: " + error);
         res.json("INVALID");
     }
 });
@@ -68,10 +62,8 @@ app.post("/api/remove-vote", async (req, res) => {
                 return;
             }
         }
-        console.log("Unable to remove vote id: " + voteName);
         res.json("NOT DELETED");
     } catch (error) {
-        console.log("Error removing vote id: " + error);
         res.json("INVALID");
     }
 });
@@ -81,7 +73,6 @@ app.post("/api/cast-vote", async (req, res) => {
 
     try {
         const { voteID, name, vote } = req.body;
-        console.log("Name: " + name + " voted " + vote + " in " + voteID);
         for (let i = 0; i < votes.length; i++) {
             if (votes[i].subject === voteID) {
                 votes[i].votes[name] = vote;
@@ -100,7 +91,6 @@ app.post("/api/reopen-vote", async (req, res) => {
 
     try {
         const voteID = req.body.data;
-        console.log("Reopen vote" + voteID);
         for (let i = 0; i < votes.length; i++) {
             if (votes[i].subject === voteID) {
                 votes[i].votes = {};
@@ -119,7 +109,6 @@ app.post("/api/get-votes", async (req, res) => {
 
     try {
         const voteName = req.body.data;
-        console.log("Fetching votes for " + voteName);
         for (let i = 0; i < votes.length; i++) {
             if (votes[i].subject === voteName) {
                 res.json(votes[i].votes);
